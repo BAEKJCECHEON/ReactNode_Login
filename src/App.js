@@ -7,22 +7,22 @@ import Loginrun from './component/Loginrun';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 function App() {
+    /*
     const [islogin, setIslogin] = useState(false);
 
     useEffect(() => {
-        if (sessionStorage.getItem('userid') === null) {
+        if (sessionStorage.getItem('islogin') === null) {
             console.log('isLogin?? :: ', islogin);
         } else {
             setIslogin(true);
             console.log('isLogin?? :: ', islogin);
         }
     });
-
+*/
     return (
         <div className="App-header">
             <Header />
             <Login />
-            <Loginrun />
             <Sign />
         </div>
     );

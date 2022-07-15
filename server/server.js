@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql'); // mysql 모듈 사용
 const { json } = require('body-parser');
+const { useState } = require('react');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -41,26 +42,64 @@ app.post('/idplz', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const test = req.body.userid;
-    const test2 = req.body.userpw;
+    const user_id = req.body.user_id;
+    const user_pw = req.body.user_pw;
     console.log('================START=================');
-    console.log('입력한ID : ' + test);
-    console.log('입력한PW : ' + test2);
-    var sql = 'select * from test where test_body=?';
-    if (
-        connection.query(sql, [test], function (err, rows, fields) {
-            if (rows[0] == undefined) {
-                console.log('아이디 없음');
-                res.send({ message: '아이디없음' });
-            } else {
-                if (rows[0].test_pw == test2) {
-                    console.log('로그인 성공');
-                } else {
-                    console.log('비밀번호 오류');
+    console.log('입력한ID : ' + user_id);
+    console.log('입력한PW : ' + user_pw);
+
+    connection.query('select count(*) as result from test where test_body = ?', [user_id], function (err, rows) {
+        if (rows[0].result == 1) {
+            //아이디 있을때
+            connection.query('select * from test where test_body = ?', [user_id], function (err, rows) {
+                if (rows[0].test_body === user_id) {
+                    //아이디 맞을때
+                    if (rows[0].test_pw === user_pw) {
+                        //비밀번호도 맞을때
+                        res.send({
+                            msg: '로그인 성공',
+                            rows: rows,
+                        });
+                    } else {
+                        //비밀번호는 다를때
+                        res.send({
+                            msg: '비밀번호를 확인하세요',
+                            rows: rows,
+                        });
+                    }
                 }
+            });
+        } else {
+            //아이디가 없을 때
+            res.send({
+                msg: '아이디를 확인하세요',
+                rows: rows,
+            });
+        }
+    });
+
+    //var sql = 'select * from test where test_body=?';
+    /*
+    connection.query(sql, [user_id], function (err, rows) {
+        if (!err) {
+            if (rows[0].result < 1) {
+                res.send({ msg: '입력하신 id가 일치하지 않습니다.' });
+            } else {
+                const sql2 = 'select * from test where test_body =?';
+                connection.query(sql2, [user_id], function (err, rows) {
+                    if (!err) {
+                        res.send(rows[0]);
+                        console.log(rows[0]);
+                    } else {
+                        res.send(err);
+                    }
+                });
             }
-        })
-    );
+        } else {
+            res.send(err);
+        }
+    });
+        */
 });
 
 app.listen(port, () => {
