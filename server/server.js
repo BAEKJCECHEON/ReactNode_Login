@@ -77,29 +77,6 @@ app.post('/login', (req, res) => {
             });
         }
     });
-
-    //var sql = 'select * from test where test_body=?';
-    /*
-    connection.query(sql, [user_id], function (err, rows) {
-        if (!err) {
-            if (rows[0].result < 1) {
-                res.send({ msg: '입력하신 id가 일치하지 않습니다.' });
-            } else {
-                const sql2 = 'select * from test where test_body =?';
-                connection.query(sql2, [user_id], function (err, rows) {
-                    if (!err) {
-                        res.send(rows[0]);
-                        console.log(rows[0]);
-                    } else {
-                        res.send(err);
-                    }
-                });
-            }
-        } else {
-            res.send(err);
-        }
-    });
-        */
 });
 
 app.listen(port, () => {

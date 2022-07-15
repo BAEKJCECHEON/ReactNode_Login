@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { Component, useState, useRef, useEffect } from 'react';
 
-const Header = () => {
+const Header = (props) => {
+    const [user_name, setUserName] = useState(props.user_name);
+
     return (
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '100px', height: '120px', alignItems: 'center', fontSize: '18px' }}>
             <h1
                 style={{
                     fontWeight: 'bolder',
-                    fontSize: '50px',
+                    fontSize: '40px',
                     height: '120px',
                     display: 'flex',
                     alignItems: 'center',
                     margin: '0px',
-                    marginBottom: '100px',
                 }}
             >
-                Login Test
+                Login Test!
             </h1>
         </div>
     );

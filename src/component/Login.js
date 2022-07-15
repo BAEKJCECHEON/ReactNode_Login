@@ -25,11 +25,15 @@ function Login() {
             .then((res) => {
                 if (res.data.rows[0].test_body === inputId) {
                     if (res.data.rows[0].test_pw === inputPw) {
+                        //아이디 & 비밀번호 맞을때
+                        sessionStorage.setItem('user_id', inputId);
                         alert(res.data.msg);
                     } else {
+                        //비밀번호가 다를때
                         alert(res.data.msg);
                     }
                 } else {
+                    //아이디가 없을때
                     alert(res.data.msg);
                 }
                 document.location.href = '/';
