@@ -4,7 +4,6 @@ import Header from './component/Header';
 import Sign from './component/Sign';
 import Login from './component/Login';
 import Success from './component/Success';
-import Fail from './component/Fail';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './component/Home';
 
