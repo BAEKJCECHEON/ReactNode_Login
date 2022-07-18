@@ -5,11 +5,18 @@ import React, { Component, useState, useRef, useEffect } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
 const Success = (props) => {
+    const isLogin = props.isLogin;
+    const logout = () => {
+        sessionStorage.removeItem('user_id');
+        document.location.href = '/';
+    };
     return (
         <>
             <div>
-                <h1>로그인 성공</h1>
-                <h5 style={{ paddingLeft: '150px', marginLeft: '150px' }}> {props.user_name}님 안녕하세요</h5>
+                <h1>메인 페이지</h1>
+            </div>
+            <div>
+                <button onClick={logout}>로그아웃</button>
             </div>
         </>
     );

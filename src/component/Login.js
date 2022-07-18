@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
@@ -27,16 +28,18 @@ function Login() {
                     if (res.data.rows[0].test_pw === inputPw) {
                         //아이디 & 비밀번호 맞을때
                         sessionStorage.setItem('user_id', inputId);
+                        document.location.href = '/Success';
                         alert(res.data.msg);
                     } else {
                         //비밀번호가 다를때
                         alert(res.data.msg);
+                        document.location.href = '/Login';
                     }
                 } else {
                     //아이디가 없을때
                     alert(res.data.msg);
+                    document.location.href = '/Login';
                 }
-                document.location.href = '/';
             });
     };
 
@@ -52,6 +55,7 @@ function Login() {
             <button className="loginBtn" type="button" onClick={btnClick} style={{ margin: '10px', fontSize: '14px' }}>
                 로그인
             </button>
+            <Link to="/Sign">회원가입</Link>
         </div>
     );
 }

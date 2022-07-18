@@ -5,12 +5,14 @@ import Sign from './component/Sign';
 import Login from './component/Login';
 import Success from './component/Success';
 import Fail from './component/Fail';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './component/Home';
 
 function App() {
-    const [islogin, setIslogin] = useState(false);
+    //const [islogin, setIslogin] = useState(false);
     const [user_name, setUserName] = useState('비회원');
 
+    /*
     useEffect(() => {
         if (sessionStorage.getItem('user_id') === null) {
             //세션이 없을때
@@ -24,12 +26,20 @@ function App() {
             console.log('isLogin?? :: ', islogin);
         }
     });
+    */
 
     return (
         <div className="App-header">
-            <Header />
-            {islogin ? <Success user_name={user_name} /> : <Login />}
-            <Sign />
+            <BrowserRouter>
+                <Header user_name={user_name} />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/Login" element={<Login />} />
+                    {/*{islogin ? <Route path="/" element={<Success islogin={islogin} />} /> : <Route path="/Sign" element={<Sign />}/>*/}
+                    <Route path="/Sign" element={<Sign />} />
+                    <Route path="/Success" element={<Success />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 }
