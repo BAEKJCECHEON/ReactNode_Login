@@ -28,7 +28,7 @@ function App() {
     */
 
     return (
-        <div className="App-header">
+        <div className="App">
             <BrowserRouter>
                 <Header user_name={user_name} />
                 <Routes>
