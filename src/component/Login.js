@@ -12,7 +12,7 @@ function Login() {
     //const islogin = props.islogin;
 
     const idInputCheck = (e) => {
-        const idRegEx = /^[A-Za-z0-9]{8,20}$/;
+        const idRegEx = /^[A-Za-z0-9]{4,20}$/;
         if (idRegEx.test(e.target.value)) {
             document.getElementById('error1').style.display = 'none';
             setInputId(e.target.value);
@@ -23,10 +23,10 @@ function Login() {
     };
 
     const pwInputCheck = (e) => {
-        const pwRegEx = /^[A-Za-z0-9]{8,20}$/;
+        const pwRegEx = /^[A-Za-z0-9]{4,20}$/;
         if (pwRegEx.test(e.target.value)) {
             document.getElementById('error2').style.display = 'none';
-            setInputId(e.target.value);
+            setInputPw(e.target.value);
             console.log('입력됨' + e.target.value);
         } else {
             document.getElementById('error2').style.display = '';

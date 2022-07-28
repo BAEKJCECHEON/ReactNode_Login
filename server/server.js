@@ -27,8 +27,14 @@ app.get('/', (req, res) => {
 app.post('/idplz', (req, res) => {
     const user_id = req.body.user_id;
     const user_pw = req.body.user_pw;
-    connection.query('select count(*) as result from test where test_body = ?', [user_id], function (err, rows) {
-        if (user_id === null) {
+    console.log(user_id + '테스트용');
+    if (user_id === '' || user_pw === '') {
+        res.send({
+            msg: '양식을 확인하세요.',
+            stat: 'error',
+        });
+    } else {
+        connection.query('select count(*) as result from test where test_body = ?', [user_id], function (err, rows) {
             if (rows[0].result == 1) {
                 res.send({
                     msg: '아이디 중복입니다.',
@@ -45,13 +51,8 @@ app.post('/idplz', (req, res) => {
                     });
                 });
             }
-        } else {
-            res.send({
-                msg: '공백을 포함하지 않습니다.',
-                stat: 'null',
-            });
-        }
-    });
+        });
+    }
 });
 
 app.post('/login', (req, res) => {
