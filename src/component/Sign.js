@@ -5,30 +5,50 @@ import { Container } from '@mui/system';
 import LockIcon from '@mui/icons-material/Lock';
 
 function Sign() {
-    const [testbody, setTestbody] = useState('');
-    const [testpw, setTestpw] = useState('');
+    const [inputId, setInputId] = useState('');
+    const [inputPw, setInputPw] = useState('');
 
     const handleChange1 = (e) => {
-        setTestbody(e.target.value);
+        const idRegEx = /^[A-Za-z0-9]{8,20}$/;
+        if (idRegEx.test(e.target.value)) {
+            document.getElementById('error1').style.display = 'none';
+            setInputId(e.target.value);
+            console.log('입력됨' + e.target.value);
+        } else {
+            document.getElementById('error1').style.display = '';
+        }
     };
 
     const handleChange2 = (e) => {
-        setTestpw(e.target.value);
+        const pwRegEx = /^[A-Za-z0-9]{8,20}$/;
+        if (pwRegEx.test(e.target.value)) {
+            document.getElementById('error2').style.display = 'none';
+            setInputId(e.target.value);
+            console.log('입력됨' + e.target.value);
+        } else {
+            document.getElementById('error2').style.display = '';
+        }
     };
 
     const submitId = () => {
+        console.log('btn click');
         axios
             .post('http://localhost:3001/idplz', {
-                testbody: testbody,
-                testpw: testpw,
+                user_id: inputId,
+                user_pw: inputPw,
             })
             .then((res) => {
-                if (res.data.message) {
-                    console.log('test');
+                if (res.data.stat == 'noSign') {
+                    //가입미완료
+                    alert(res.data.msg);
+                } else if (res.data.stat == 'yesSign') {
+                    //가입완료
+                    alert(res.data.msg);
+                    document.location.href = '/';
                 } else {
-                    console.log('test success');
+                    //공백문자
+                    alert(res.data.msg);
                 }
-                document.location.href = '/';
             });
     };
 
@@ -49,7 +69,13 @@ function Sign() {
                     회원가입
                 </Typography>
                 <TextField label="아이디" id="id" name="id" margin="normal" fullWidth autoComplete="아이디" autoFocus required onChange={handleChange1} />
+                <span id="error1" name="error" style={{ color: 'red', display: 'none' }}>
+                    올바른 아이디 양식이 아닙니다.
+                </span>
                 <TextField label="패스워드" id="password" name="password" margin="normal" fullWidth type="password" required autoComplete="패스워드" onChange={handleChange2} />
+                <span id="error2" name="error" style={{ color: 'red', display: 'none' }}>
+                    올바른 비밀번호 양식이 아닙니다.
+                </span>
                 <Button type="submit" fullWidth variant="contained" onClick={submitId} sx={{ mt: 2 }}>
                     회원가입
                 </Button>

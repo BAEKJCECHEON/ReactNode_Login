@@ -33,7 +33,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/Login" element={<Login />} />
-                    {/*{islogin ? <Route path="/" element={<Success islogin={islogin} />} /> : <Route path="/Sign" element={<Sign />}/>*/}
                     <Route path="/Sign" element={<Sign />} />
                     <Route path="/Success" element={<Success />} />
                     <Route path="/Buttons" element={<Buttons />} />

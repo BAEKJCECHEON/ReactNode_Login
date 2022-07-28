@@ -25,17 +25,30 @@ app.get('/', (req, res) => {
 });
 
 app.post('/idplz', (req, res) => {
-    const test = req.body.testbody;
-    const test2 = req.body.testpw;
-    const sql = 'insert into test (test_body, test_pw) values (?,?)';
-    var param = [test, test2];
-    connection.query(sql, param, function (err, rows, fields) {
-        if (err) {
-            console.log(err);
+    const user_id = req.body.user_id;
+    const user_pw = req.body.user_pw;
+    connection.query('select count(*) as result from test where test_body = ?', [user_id], function (err, rows) {
+        if (user_id === null) {
+            if (rows[0].result == 1) {
+                res.send({
+                    msg: '아이디 중복입니다.',
+                    rows: rows,
+                    stat: 'noSign',
+                });
+            } else {
+                connection.query('insert into test (test_body, test_pw) values(?,?)', [user_id, user_pw], function () {
+                    console.log('회원가입 완료');
+                    res.send({
+                        msg: '회원가입이 완료되었습니다.',
+                        rows: rows,
+                        stat: 'yesSign',
+                    });
+                });
+            }
         } else {
-            console.log('가입성공');
             res.send({
-                message: '회원가입 완료',
+                msg: '공백을 포함하지 않습니다.',
+                stat: 'null',
             });
         }
     });
