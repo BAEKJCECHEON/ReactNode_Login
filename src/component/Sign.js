@@ -39,7 +39,7 @@ function Sign() {
             })
             .then((res) => {
                 if (res.data.stat == 'noSign') {
-                    //가입미완료
+                    //가입미완료시
                     alert(res.data.msg);
                 } else if (res.data.stat == 'yesSign') {
                     //가입완료
