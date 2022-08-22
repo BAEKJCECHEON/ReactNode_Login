@@ -4,8 +4,6 @@ const port = 3001; // react의 기본값은 3000이니까 3000이 아닌 아무 
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql'); // mysql 모듈 사용
-const { json } = require('body-parser');
-const { useState } = require('react');
 
 var connection = mysql.createConnection({
     host: 'localhost',

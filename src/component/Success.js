@@ -6,7 +6,14 @@ const Success = (props) => {
     return (
         <>
             <div>
-                <h1>메인 페이지</h1>
+                <h1>환영합니다.</h1>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <h2>Hyundai</h2>
+                <span style={{ fontSize: '20px' }}>Kona</span>
             </div>
         </>
     );

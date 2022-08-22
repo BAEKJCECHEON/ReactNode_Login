@@ -3,10 +3,11 @@ import './App.css';
 import Header from './component/Header';
 import Sign from './component/Sign';
 import Login from './component/Login';
-import Success from './component/Success';
 import Buttons from './component/Buttons';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './component/Home';
+import Success from './component/Success';
+import Kona from './component/Kona';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
     //const [islogin, setIslogin] = useState(false);
@@ -31,11 +32,12 @@ function App() {
             <BrowserRouter>
                 <Header user_name={user_name} />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home user_name={user_name} />} />
                     <Route path="/Login" element={<Login />} />
                     <Route path="/Sign" element={<Sign />} />
-                    <Route path="/Success" element={<Success />} />
                     <Route path="/Buttons" element={<Buttons />} />
+                    <Route path="/Success" element={<Success />} />
+                    <Route path="/Kona" element={<Kona />} />
                 </Routes>
             </BrowserRouter>
         </div>

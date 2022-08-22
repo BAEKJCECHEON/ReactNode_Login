@@ -1,13 +1,9 @@
-import { hover } from '@testing-library/user-event/dist/hover';
-import e from 'cors';
-import React, { Component, useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Buttons from './Buttons';
 import './header.scss';
 
 const Header = (props) => {
-    const [user_name, setUserName] = useState(props.user_name);
-
     const logout = () => {
         if (window.confirm('로그아웃 하시겠습니까?')) {
             sessionStorage.removeItem('user_id');
